@@ -11,6 +11,7 @@ urlpatterns = [
     path("deletetodo/<int:todo_id>",views.deletetodo,name='deletetodo'),
     path("contact",views.contact,name='contact'),
     path('logout/',views.LogoutView,name='logout'),
+    path('set_language',views.set_language,name='set_language'),
 
 
 ]

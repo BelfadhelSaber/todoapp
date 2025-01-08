@@ -1,19 +1,30 @@
 
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
-<h1>hello</h1>
-<select name="language">
-    {% get_current_langage as LANGUAGE_CODE %}
-    {% get_available_langage as LANGUAGE_CODE %}
-    {% get_language_info_list for LANGUAGES aas languages %}
+<form action="{%url 'set_language' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="set_language" value="{{request.get_full_path|slice:'3:'}}">
+    <p>{% trans "bonjour" %}</p>
+    <select name="language">
+    {% get_current_language as LANGUAGE_CODE %}
+    {% get_available_languages as LANGUAGE_CODE %}
+    {% get_language_info_list for LANGUAGES as languages %}
     {% for language in languages %}
-    <option value="{{language.code}}" {% if language.code==LANGUAGE_CODE %} selected{% endif %}>{{language.name_local}} ({{language.code}})</option>
+    <option 
+    value="{{ language.code }}" 
+    {% if language.code == LANGUAGE_CODE %}selected{% endif %}
+>
+    {{ language.name_local }} {{ language.code }}
+</option>
+<a href=""></a>
     {% endfor %}
+    
 </select>
-<input type="submit" value="Go">
-<img src=".{% static 'images/kosksi.jpg' %}" alt="">
+<button type="submit" >Go</button>
+</form>
 {% static ''  %}
 
 {% endblock %}

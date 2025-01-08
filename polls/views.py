@@ -2,7 +2,10 @@ from django.http import HttpResponse
 from django.shortcuts import render , redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-#from django.utils.translation import gettext as _
+from django.utils import translation
+from django.conf import settings
+
+from django.utils.translation import gettext as _
 from .models import User, Todo
 
 @login_required
@@ -71,3 +74,19 @@ def contactus(request):
     name=request.child
 
 
+def set_language(request):
+    next = request.REQUEST.get('next', None)
+    if not next:
+        next = request.META.get('HTTP_REFERER', None)
+    if not next:
+        next = '/'
+    response = http.HttpResponseRedirect(next)
+    if request.method == 'GET':
+        lang_code = request.GET.get('language', None)
+        if lang_code and check_for_language(lang_code):
+            if hasattr(request, 'session'):
+                request.session['django_language'] = lang_code
+            else:
+                response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang_code)
+            translation.activate(lang_code)
+    return response
