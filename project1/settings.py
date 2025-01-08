@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-g75xjqayv#czk9p-+unxercm67qm%%+5i$a$y0x257v2t9%hd!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True#SALAHT HNA 
 
 ALLOWED_HOSTS = []
 
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.local.LoalMiddleware',
+    #'django.middleware.local.LoalMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -135,6 +135,6 @@ STATIC_ROOT = os.path.join(BASE_DIR,'STATICFILES')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOCALE_PATHS=[
-    BASE_DIR/'local',
-]
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale/'),
+)
