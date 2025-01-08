@@ -20,11 +20,13 @@ from django.urls import path,include
 from django.conf import settings
 
 from django.conf.urls.i18n import i18n_patterns
-
-urlpatterns=[
-    path('i18n/',include('django.conf.urls.i18n')),
+# Add translations and admin panel paths
+urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
 ]
-urlpatterns += i18n_patterns (
-    path('admin/', admin.site.urls),
-    path('',include('polls.urls')),
-    )
+
+# Add localized paths (wrapped in i18n_patterns)
+urlpatterns += i18n_patterns(
+    path('admin/', admin.site.urls),  # Admin interface
+    path('', include('polls.urls')),  # Default route for the 'polls' app
+)
