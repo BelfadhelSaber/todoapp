@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render , redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
+#from django.utils.translation import gettext as _
 from .models import User, Todo
 
 @login_required
@@ -46,6 +46,7 @@ def LogoutView(request):
     return redirect('login')
 #@login_required
 def home(request):
+   
     return render(request,'polls/home.html',{})
 @login_required
 def contact(request):
