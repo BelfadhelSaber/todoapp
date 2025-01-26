@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <div>
+            <img src="{{Hotel.image}}" >
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <div class="text-warning display-3">
+            {{Hotel.title}}
+        </div>
+        <div class="text-danger">
+            {{Hotel.price}}
+        </div>
+        <div class="">
+            {{Hotel.description}}
+        </div>
+    </div>
+{% endblock %}
