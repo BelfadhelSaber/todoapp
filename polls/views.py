@@ -96,8 +96,8 @@ def checkout(request,hotel_id):
         ch=Checkout.objects.create(email=email,adresse=adresse,ville=ville,pays=pays,zipcode=zipcode,nbpersonne=nbpersonne,nbenfant=nbenfant)
         print(ville)
         ch.save()
-        hotel=Hotel.objects.get(pk=hotel_id)
-    return render(request,'polls/checkout.html',{'checkouts':checkouts},{'hotel':hotel})
+    hotel=Hotel.objects.get(pk=hotel_id)
+    return render(request,'polls/checkout.html',{'checkouts':checkouts,'hotel':hotel})
 
 def hotel(request):
     product_object=Hotel.objects.all()

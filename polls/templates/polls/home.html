@@ -23,15 +23,15 @@
     </div>
 
     <div class="row">
-        {% for Hotel in product_object %}
+        {% for hotel in product_object %}
 
         <div class="col-md-3">
             <div class="card">
-                <img src="{{Hotel.image}}" alt="" class="card-image-top" >
+                <img src="{{hotel.image}}" alt="" class="card-image-top" >
                 
                 <div class="card-body">
-                    <div style="text-align: center;" id="aa{{Hotel.id}}" class="card-title">{{Hotel.title}}</div>
-                    <div style="text-align: center;" class="card-text" id="price">{{Hotel.price}}$</div>
+                    <div style="text-align: center;" id="aa{{hotel.id}}" class="card-title">{{hotel.title}}</div>
+                    <div style="text-align: center;" class="card-text" id="price">{{hotel.price}}$</div>
                     <div><a href="{% url 'detail' %}">Detail</a></div>
                     <div>
                         <select name="select" class="select" id="select">
