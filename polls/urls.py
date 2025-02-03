@@ -4,14 +4,16 @@ from . import views
 
 urlpatterns = [
     
-    path("", views.index, name="index"),
+    path("index", views.index, name="index"),
+    path("",views.bienvenu,name='bienvenu'),
     path("login",views.loginpage,name='login'),
     path("signup",views.signup,name="signup"),
-    path("home",views.hotel,name='home'),
+    path("hotels",views.hotel,name='home'),
     path("flight_list",views.flight_list,name='flight_list'),
     path('reserver_vol', views.reserver_vol, name='reserver_vol'),
+    path('reservation/success/', views.reservation_success, name='reservation_success'),
+
     path('<int:myid>',views.detail,name='detail'),
-    path("bienvenu",views.bienvenu,name='bienvenu'),
     path('checkout/<int:hotel_id>',views.checkout,name='checkout'),
     path("contact",views.contact,name='contact'),
     path('logout/',views.LogoutView,name='logout'),

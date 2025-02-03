@@ -3,11 +3,11 @@
 
 
 {% block content %}
-    <h1 style="text-align: center;margin-top: -40px; font-family:monospace;">Les Meilleures Destinations</h1>
-    <li   class="{% if url_name == 'flight_list' %}active{% endif %} " ><a   href="{% url 'flight_list' %}">Vols</a></li><img style="margin-right: 20px;" width="20px" src="{% static 'main/img/vol.jpg' %}">
 
-   
-            
+
+<h1 style="text-align: center;margin-top: -40px;padding:20px 20px; font-family:monospace;">Les Meilleures Destinations</h1>
+<li   class="{% if url_name == 'flight_list' %}active{% endif %} " ><a   href="{% url 'flight_list' %}">Vols</a></li><img style="margin-right: 20px;left:20vh;" width="20px" src="{% static 'main/img/vol.jpg' %}">
+<div class="content row" style="margin:auto;padding:50px 50px;" >
     <div class="row">
         <div class="col-md-12">
             <form class="card cart-sm">
@@ -75,7 +75,7 @@
             </ul>
         </div>
     </div>
-    </row>
+</div>
 
 {% endblock %}
 

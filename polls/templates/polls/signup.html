@@ -36,7 +36,20 @@
                   <h2 class="text-uppercase text-center mb-5">
                     signup
                   </h2>
-
+                  {% if messages %}
+                  {% for message in messages %}
+                      <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% endif %}">
+                          {{ message }}
+                      </div>
+                  {% endfor %}
+                  {% if "success" in message.tags %}
+                  <script>
+                      setTimeout(function() {
+                          window.location.href = "{% url 'login' %}"; 
+                      }, 7000);
+                  </script>
+              {% endif %}
+              {% endif %}
                   <form action="{%url 'signup' %}" method="post">
                     {% csrf_token %}
                     <!-- Email input -->
@@ -83,6 +96,12 @@
                     <!-- Submit button -->
                     <button type="submit" class="btn btn-primary btn-block">Sign in</button>
                   </form>
+                  <div class="loginSignUpSeparator ">
+                    <span class="textInSeparator">OU</span>
+                  </div>
+                  <div class="texts">
+                    <p>Vous n'avez pas de compte ? <a href="{% url 'login' %}" style="font-weight: bold; color: blue;">S'inscrire</a></p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -90,6 +109,40 @@
         </div>
       </div>
     </section>
+    <script>
+      // Check if there's a success message
+      window.addEventListener("DOMContentLoaded", function() {
+          let successMessage = document.querySelector(".alert-success");
+          
+          if (successMessage) {
+              setTimeout(function() {
+                  window.location.href = "{% url 'login' %}";
+              }, 2000); // 7000ms = 7 seconds
+          }
+      });
+  </script>
+<style>
+  .texts {
+    text-align: center;
+}
+.loginSignUpSeparator {
+  border-top: 2px solid #edf0f2;
+  position: relative;
+  margin-top: 5%;
+  margin-bottom: 4.2%;
+  height: 15px;
+  text-align: center;
+  font-size: 83.34%;
+}
+.loginSignUpSeparator .textInSeparator {
+  display: inline-block;
+  background-color: #fff;
+  padding: 0 0.5em;
+  position: relative;
+  color: black;
+  top: -0.7em;
+}
+</style>
     <!-- MDB -->
   </body>
 </html>

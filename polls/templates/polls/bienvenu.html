@@ -20,11 +20,14 @@
         <ul class="menu">
             <li class="{% if url_name == 'home' %}active{% endif %} " ><a href="{% url 'home' %}" >Hotel</a></li><img style="margin-right: 20px;" width="20px" src="{% static 'main/img/hotel1.jpg' %}">
             <li class="{% if url_name == 'Contact' %}active{% endif %} " ><a href="{% url 'contact' %}">Contact</a></li><img style="margin-right: 20px;" width="20px" src="{% static 'main/img/contact.jpg' %}">
+           
+            {% if user.is_authenticated %}
+            <li class="{% if url_name == 'logout' %}active{% endif %} " ><a href="{% url 'logout' %}">logout</a></li><img style="margin-right: 20px;" width="20px" src="{% static 'main/img/login.jpg' %}">
+           {% else %}
             <li class="{% if url_name == 'Login' %}active{% endif %} " ><a href="{% url 'login' %}" class="active">Login</a></li><img style="margin-right: 20px;" width="20px" src="{% static 'main/img/login.jpg' %}">
             <li class="{% if url_name == 'signup' %}active{% endif %} " ><a href="{% url 'signup' %}">signup</a></li><img style="margin-right: 20px;" width="20px" src="{% static 'main/img/login.jpg' %}">
-            
+            {% endif %}
 
-            <li class="{% if url_name == 'logout' %}active{% endif %} " ><a href="{% url 'logout' %}">logout</a></li><img style="margin-right: 20px;" width="20px" src="{% static 'main/img/login.jpg' %}">
             
             {% endwith %}
         </ul>

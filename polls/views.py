@@ -13,7 +13,9 @@ from django.shortcuts import render, redirect
 
 from datetime import datetime
 import math
-
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.models import User
 @login_required
 def index(request):
     print('test')
@@ -25,40 +27,42 @@ def index(request):
 def loginpage(request):
     if request.user.is_authenticated:
         return redirect('home')
-    if request.method == 'POST' :
+
+    if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        print(username,password)
-        print('::::::::::::::::::::::')
-        try :
-            validate_user = authenticate(username=username, password=password)
-        except Exception as e:
-            print(e)
+
+        validate_user = authenticate(username=username, password=password)
+
         if validate_user is not None:
-            print('test was here')
-            try :
-                login(request, validate_user)
-            except Exception as e :
-                print(e)
+            login(request, validate_user)
+            messages.success(request, "Login successful! Redirecting to home page...")
             return redirect('home')
         else:
-            return redirect('login')
-        
-    return render(request,'polls/login.html',{})
+            messages.error(request, "Invalid username or password. Please try again.")
+
+    return render(request, 'polls/login.html')
 
 
 def signup(request):
-
-    if request.method == 'POST' :
+    if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
         username = request.POST.get('username')
-        print(username,email,password)
-       
-        user = User.objects.create(email=email,password=password,username=username)
-        user.save()
-    return render(request,'polls/signup.html',{})
-    return HttpResponse("Hello, world. You're at the polls index.")
+
+        if not email or not password or not username:
+            messages.error(request, "All fields are required.")
+        elif User.objects.filter(username=username).exists():
+            messages.error(request, "Username already taken.")
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, "Email already registered.")
+        else:
+            user = User.objects.create_user(username=username, email=email, password=password)
+            user.save()
+            messages.success(request, "Account created successfully! You can now log in.")
+            
+    return render(request, 'polls/signup.html')
+
 def LogoutView(request):
     logout(request)
     return redirect('login')
@@ -183,9 +187,46 @@ def Réservation_vol(request):
 
 
 
-
+from .models import Reserver_vol, Personne
 def reserver_vol(request):
-   
-        
-
-        return render(request, 'polls/reserver_vol.html')
+    if request.method == 'POST' :
+        try :
+            nbpersonne = int(request.POST.get('nbpersonne'))
+            compagnie = request.POST.get('Compagnie')
+            depart = request.POST.get('Depart')
+            arrivee = request.POST.get('Arrivee')
+            date = request.POST.get('Date')
+            prix = request.POST.get('Prix')
+            vol = request.POST.get('vol')
+            classe = request.POST.get('Classe')
+            reservation = Reserver_vol.objects.create(
+                nbpersonne=nbpersonne,
+                compagnie=compagnie,
+                depart=depart,
+                arrivée=arrivee,
+                date=date,
+                prix=prix,
+                vol=vol,
+                classe=classe
+            )
+            for i in range(1, nbpersonne + 1):
+                nom = request.POST.get(f'Nom{i}')
+                email = request.POST.get(f'Email{i}')
+                tel = request.POST.get(f'Tel{i}')
+                passeport = request.POST.get(f'Passeport{i}')
+                Personne.objects.create(
+                    reservation=reservation,
+                    nom=nom,
+                    email=email,
+                    tel=tel,
+                    passeport=passeport
+                )
+            messages.success(request, "Reservation successful!")
+            return redirect('reservation_success') 
+        except Exception as e:
+            messages.error(request, f"An error occurred: {e}")
+            return redirect('reservation_form')  
+    return render(request, 'polls/reserver_vol.html')
+def reservation_success(request):
+#   # TODO: add page html reservation
+    return render(request, 'polls/reservation_success.html')

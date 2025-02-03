@@ -89,15 +89,20 @@ from django.db import models
 
 class Reserver_vol(models.Model):
     nbpersonne=models.CharField(max_length=200)
-    Compagnie=models.CharField(max_length=200)
-    Départ = models.CharField(max_length=100)
-    Arrivée=models.CharField(max_length=300,null=True)
+    compagnie=models.CharField(max_length=200)
+    depart = models.CharField(max_length=100,null=True)
+    arrivée=models.CharField(max_length=300,null=True)
     date = models.DateTimeField(auto_now=True)
-    Prix=models.DecimalField(max_digits=10, decimal_places=2)
+    prix=models.DecimalField(max_digits=10, decimal_places=2,null=True)
     vol=models.CharField(max_length=500)
-    Classe=models.CharField(max_length=500)
+    classe=models.CharField(max_length=500)
     
     def __str__(self):
-        return self.nbpersonne+' '+self.Depart+' '+self.arrivee+' '+self.Prix+' '+self.vol+' '+self.Classe
+        return str(self.pk)
 
-
+class Personne(models.Model):
+    reservation = models.ForeignKey(Reserver_vol, related_name="personnes", on_delete=models.CASCADE)
+    nom = models.CharField(max_length=255)
+    email = models.EmailField()
+    tel = models.CharField(max_length=15)
+    passeport = models.CharField(max_length=255)

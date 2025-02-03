@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% endif %}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+<div style="margin:auto;padding: 20px 40px; width: 50%;">
 <form method="POST">
   {% csrf_token %}
   <div class="form-row">
@@ -64,7 +71,7 @@
 
   <button type="submit" class="btn btn-primary">Réserver</button>
 </form>
-
+</div>
 {% block js %}
 <script type="text/javascript">
   function generateForms() {
