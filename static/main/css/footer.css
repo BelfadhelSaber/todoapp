@@ -1,0 +1,8 @@
+.footer {
+    background-color: white; /* Couleur de fond blanche */
+    color: black; /* Texte en noir pour la lisibilité */
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+    border-top: 1px solid #ddd; /* Ligne subtile en haut */
+}

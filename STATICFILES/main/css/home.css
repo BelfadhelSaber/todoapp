@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Style général pour le menu */
 header {
     background-color: black; /* Fond noir */
@@ -44,3 +45,51 @@ header {
     font-weight: bold; /* Texte gras pour l'élément actif */
     color: lightblue; /* Couleur différente pour l'élément actif */
 }
+=======
+/* Style général pour le menu */
+header {
+    background-color: black; /* Fond noir */
+    padding: 10px 0; /* Espacement vertical */
+}
+
+#logo {
+    display: inline-block;
+    margin-right: 600px; /* Espace entre le logo et le menu */
+}
+
+
+#logo a {
+    padding-top: 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 20px; /* Taille du texte du logo */
+}
+
+.menu {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    display: inline; /* Afficher les éléments horizontalement */
+    margin-right: 20px; /* Espacement entre les liens */
+}
+
+.menu li a {
+    padding-top: 20px;
+    text-decoration: none; /* Supprimer le soulignement */
+    color: white; /* Texte blanc */
+    font-size: 18px; /* Taille du texte */
+}
+
+.menu li a:hover {
+    color: lightblue; /* Couleur du texte au survol */
+}
+
+.menu li.active a {
+    font-weight: bold; /* Texte gras pour l'élément actif */
+    color: lightblue; /* Couleur différente pour l'élément actif */
+}
+>>>>>>> master

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% endif %}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+<div style="margin:auto;padding: 20px 40px; width: 50%;">
+<form method="POST">
+  {% csrf_token %}
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="nbpersonne">Nombre de personnes</label>
+      <input type="number" id="nbpersonne" name="nbpersonne" min="1" value="1" class="form-control" onchange="generateForms()">
+    </div>
+  </div>
+
+  <!-- Conteneur pour les formulaires dynamiques -->
+  <div id="formsContainer">
+    <!-- Les formulaires seront générés ici -->
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="Compagnie">Compagnie</label>
+      <input type="text" id="Compagnie" name="Compagnie" class="form-control" placeholder="Compagnie">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="Depart">Départ</label>
+      <input type="text" id="Depart" name="Depart" class="form-control" placeholder="Départ">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="Arrivee">Arrivée</label>
+      <input type="text" id="Arrivee" name="Arrivee" class="form-control" placeholder="Arrivée">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="Date">Date</label>
+      <input type="date" id="Date" name="Date" class="form-control" placeholder="Date">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="Prix">Prix</label>
+      <input type="text" id="Prix" name="Prix" class="form-control" placeholder="Prix">
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="vol">Type de vol</label>
+      <select name="vol" class="form-control" id="vol" style="width: 200px;">
+        <option selected>Choisir...</option>
+        <option>Aller-Retour</option>
+        <option>Aller-simple</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="Classe">Classe</label>
+      <select id="Classe" name="Classe" class="form-control">
+        <option selected>Choisir...</option>
+        <option>Economique</option>
+        <option>Eco Premium</option>
+        <option>Affaires</option>
+        <option>Première</option>
+      </select>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Réserver</button>
+</form>
+</div>
+{% block js %}
+<script type="text/javascript">
+  function generateForms() {
+    const nbPersonne = parseInt(document.getElementById("nbpersonne").value);
+    const formsContainer = document.getElementById("formsContainer");
+    formsContainer.innerHTML = ""; // Effacer les formulaires précédents
+
+    for (let i = 1; i <= nbPersonne; i++) {
+      const formGroup = document.createElement("div");
+      formGroup.innerHTML = `
+        <h3>Personne ${i}</h3>
+        <div class="form-group col-md-6">
+          <label for="Nom${i}">Nom</label>
+          <input type="text" id="Nom${i}" name="Nom${i}" class="form-control" placeholder="Nom">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="Email${i}">Email</label>
+          <input type="email" id="Email${i}" name="Email${i}" class="form-control" placeholder="Email">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="Tel${i}">Téléphone</label>
+          <input type="text" id="Tel${i}" name="Tel${i}" class="form-control" placeholder="Téléphone">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="Passeport${i}">Passeport</label>
+          <input type="text" id="Passeport${i}" name="Passeport${i}" class="form-control" placeholder="Passeport">
+        </div>
+      `;
+      formsContainer.appendChild(formGroup);
+    }
+  }
+
+  // Générer les formulaires au chargement de la page
+  document.addEventListener("DOMContentLoaded", function() {
+    generateForms();
+  });
+</script>
+{% endblock %}
+
+{% endblock %}

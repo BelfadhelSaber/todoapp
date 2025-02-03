@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* LOGIN FORM */
+=======
+/*/* LOGIN FORM */
+>>>>>>> master
 
 .login {
     background: var(--darkened-bg);
@@ -59,3 +63,7 @@
 .login .password-reset-link {
     text-align: center;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master

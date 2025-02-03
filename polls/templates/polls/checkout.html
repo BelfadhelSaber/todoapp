@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'base.html' %}
 {% block content %}
 
@@ -72,4 +73,131 @@
       nbenfant=document.getElementById("nbenfant").value;
       
   </script>
+=======
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<form  method="POST" >
+  {% csrf_token %}
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Email</label>
+      <input type="text" id="email" name="email" class="form-control" id="inputEmail4" placeholder="Email">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Nombre Adult</label>
+      <input type="number" id="nbpersonne" name="nbpersonne" value="1" min="1" class="form-control" id="inputnbpersonne" placeholder="nbpersonne">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Nombre Enfant</label>
+      <input type="number" id="nbenfant" name="nbenfant" min="0" class="form-control" id="inputnbenfant" placeholder="nbenfant">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Nombre Bébé</label>
+      <input type="number" id="nbbebe" name="nbbebe" min="0" class="form-control" id="inputnbenfant" placeholder="nbbebe">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Prix</label>
+      <input type="number" id="prix" name="prix" readonly value="{{hotel.price}}" class="form-control" id="inputnbenfant" placeholder="prix">
+    </div>
+
+    <div>
+      <div class="form-group col-md-4">
+        <label for="inputState" >Logement</label>
+        <select name="select" class="form-control"  id="select" style="width: 200px;">
+          <option id="option" class="option" selected>choisir...</option>
+          <option>All Inclusive</option>
+          <option>Soft All Inclusive</option>
+          <option>Pension Complète</option>
+          <option>Demi Pension</option>
+          <option>Demi Pension</option>
+          <option >Logement Petit Déjeuner</option>
+        </select>
+      
+      </div>                
+    </div>
+
+    
+    
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">Address</label>
+    <input type="text" name="adresse" id="adresse" class="form-control" id="inputAddress" placeholder="1234 Main St">
+  </div>
+
+  
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input type="text" name="ville" id="ville" class="form-control" id="inputCity">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">pays</label>
+      <select  id="pays" name="pays" class="form-control">
+        <option selected>choisir...</option>
+        <option>Tunisie</option>
+        <option>Algérie</option>
+        <option>Liya</option>
+        <option>Marroc</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input name="zipcode" id="zipcode" type="text" class="form-control" id="inputZip">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">
+        Check me out
+      </label>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Commander</button>
+</form>
+{% block js %}
+{% endblock %}
+  <script type="text/javascript">
+     const nbpersonne=document.getElementById("nbpersonne").value;
+     const  nbenfant=document.getElementById("nbenfant").value;
+      document.addEventListener("DOMContentLoaded",function(){
+        const prix = '{{ hotel.price}}';
+        const nbrenfnat = document.getElementById('nbenfant');
+        const nbbebe=document.getElementById('nbbebe');
+        const nbradult = document.getElementById('nbpersonne');
+        function test_update(){
+        var adult_count = parseInt(nbradult.value) || 0;
+        var enfant_count = parseInt(nbrenfnat.value) || 0;
+        var bebe_count = parseInt(nbbebe.value) || 0;
+        var price = parseInt(prix) || 0 ;
+        var total_passenger = (bebe_count*0)+(enfant_count/2) + adult_count ;
+        var total_price = total_passenger * price;
+      document.getElementById('prix').value = total_price;  
+      }
+      nbrenfnat.addEventListener("input",test_update);
+        nbradult.addEventListener("input",test_update);
+      test_update(); /// intial value hedhy bch ywali yjbed fel price lwelni 
+      })
+
+      const selecte=document.getElementById("selecte");
+      document.addEventListener("DOMContentLoaded",function(){
+        const select='{{hotel.select}}';
+        function update(){
+          document.getElementById("selecte").value=select;
+          console.log(select);
+        }
+        nbrenfnat.addEventListener("change",update);
+
+        update();
+      })
+      
+  </script>
+>>>>>>> master
 {% endblock %}
