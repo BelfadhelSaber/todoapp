@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'main/css/detail.css' %}">
+    <div class="row">
+        <div>
+            <img src="{{hotel.image}}" width="500px" height="500px" >
+        </div>
+
+    
+            <div class="col-md-6">
+                <div class="text-warning display-3">
+                    {{hotel.title}}
+                </div>
+            <div class="text-danger">
+                Prix:{{hotel.price}}$
+            </div>
+            <div>
+                
+            </div>
+            <div class="">
+                {{hotel.description}}
+            </div>
+        
+            <a  style="float: right;" href="{% url 'checkout' hotel.pk %}" class="btn btn-warning">Réserver</a>
+        </div>
+    </div>
+{% endblock %}

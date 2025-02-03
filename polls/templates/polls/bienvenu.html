@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Boking Way</title>
+    <link rel="stylesheet" href="{% static 'main/css/bienvenu.css' %}">
+</head>
+<body>
+    
+    <header>
+        <div id="logo">
+            <li style="margin-right: 700px; font-size: 15px;" class="{% if url_name == 'bienvenu' %}active{% endif %} " ><a href="{% url 'bienvenu' %}" ><img style="padding-top: 10px;" width="80px" src="{% static 'main/img/logo.jpg' %}"></a></li>
+            {% with url_name=request.resolver_match.url_name %}
+        </div>
+        <ul class="menu">
+            <li class="{% if url_name == 'home' %}active{% endif %} " ><a href="{% url 'home' %}" >Hotel</a></li><img style="margin-right: 20px;" width="20px" src="{% static 'main/img/hotel1.jpg' %}">
+            <li class="{% if url_name == 'Contact' %}active{% endif %} " ><a href="{% url 'contact' %}">Contact</a></li><img style="margin-right: 20px;" width="20px" src="{% static 'main/img/contact.jpg' %}">
+            <li class="{% if url_name == 'Login' %}active{% endif %} " ><a href="{% url 'login' %}" class="active">Login</a></li><img style="margin-right: 20px;" width="20px" src="{% static 'main/img/login.jpg' %}">
+            <li class="{% if url_name == 'signup' %}active{% endif %} " ><a href="{% url 'signup' %}">signup</a></li><img style="margin-right: 20px;" width="20px" src="{% static 'main/img/login.jpg' %}">
+            
+
+            <li class="{% if url_name == 'logout' %}active{% endif %} " ><a href="{% url 'logout' %}">logout</a></li><img style="margin-right: 20px;" width="20px" src="{% static 'main/img/login.jpg' %}">
+            
+            {% endwith %}
+        </ul>
+    </header>
+    
+    <section id="home">
+        <h4>Booking Way pour votre service</h4>
+        <p>Chez Travel, notre mission est de transformer vos rêves d’évasion en réalité. Nous sommes bien plus qu’une simple agence de voyage : nous sommes vos partenaires pour des expériences inoubliables, des découvertes enrichissantes et des souvenirs impérissables</p>
+        <li class="{% if url_name == 'home' %}active{% endif %} " ><a  href="{% url 'home' %}" >Réserver Maintenant</a></li>
+        
+        
+    </section>
+    
+
+   
+{% endblock %}

@@ -1,0 +1,64 @@
+
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Vols</title>
+    <link rel="stylesheet" href="{% static 'main/css/vols.css' %}">
+    
+</head>
+<body>
+
+<div class="container">
+    <h1>Recherche de Vols</h1>
+    <form method="GET">
+        <input type="text" name="departure" placeholder="Ville de départ" value="{{ request.GET.departure }}">
+        <input type="date" name="date" value="{{ request.GET.date }}">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Compagnie</th>
+            <th>Départ</th>
+            <th>Arrivée</th>
+            <th>Date</th>
+            <th>Prix (€)</th>
+            <th>Type</th>
+            <th>Economique</th>
+            <th>Réservation</th>
+        </tr>
+        {% for flight in flights %}
+        <tr>
+            <td>{{ flight.airline }}</td>
+            <td>{{ flight.departure }}</td>
+            <td>{{ flight.arrival }}</td>
+            <td>{{ flight.departure_date }}</td>
+            <td>{{ flight.price }}</td>
+            <td><select name="type_vol" id="type_vol">
+                <option>Aller-Retour</option>
+                <option >Aller-simple</option>
+            </select></td>
+            <td><select name="classe" id="classe">
+                <option >Economique</option>
+                <option >Eco Premium</option>
+                <option >Affaires</option>
+                <option >Première</option>
+            </select></td>
+            <td><a href="{% url 'reserver_vol' %}" >Réserver</a></td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">Aucun vol trouvé.</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</div>
+
+</body>
+</html>
+{% endblock %}
