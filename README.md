@@ -16,6 +16,11 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 ```bash
+git branch -a 
+git checkout master
+```
+
+```bash
 pip install -r requirements.txt
 ```
 ```bash
